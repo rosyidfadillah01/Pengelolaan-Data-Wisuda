@@ -1227,13 +1227,16 @@ def daftar_peserta_wisuda():
                 hadir = mahasiswa['hadir']
                 if status == 'Y':
                     status = '\033[92m' + 'Lulus' + '\033[0m'  # Warna hijau
+                    if undangan == 'P':
+                        undangan = '\033[1;33;40m' + 'Menunggu Undangan Terkirim' + '\033[0m'
+                    elif undangan == 'Y':
+                        undangan = '\033[92m' + 'Undangan Sudah Terkirim' + '\033[0m'
+                    elif undangan == 'T':
+                        undangan = '\033[91m' + 'Undangan Tidak Terkirim' + '\033[0m'
                 else:
                     status = '\033[91m' + 'Tidak Lulus' + '\033[0m'  # Warna merah
-
-                if undangan == 'P':
-                    undangan = '\033[92m' + 'Ter-undang' + '\033[0m'
-                else:
-                    undangan = '\033[91m' + 'Menunggu Undangan Terkirim' + '\033[0m'
+                    if undangan == 'T':
+                        undangan = '\033[91m' + 'Undangan Tidak Terkirim karena Tidak Lulus' + '\033[0m'
 
                 if hadir == 'Y':
                     hadir = '\033[92m' + 'Hadir' + '\033[0m'
