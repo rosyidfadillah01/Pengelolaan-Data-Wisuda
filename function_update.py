@@ -1316,7 +1316,6 @@ def laporan(nim):
                     print(Fore.YELLOW + "Pilihan tidak ada!!!")
                     
         elif pilihan == "2":
-            print("============= [ Daftar TIDAK HADIR peserta wisuda ] ==============")
             url = "https://api-kelompok6.darkclownsecurity.id/mahasiswa.php"
 
             params = {
@@ -1329,20 +1328,27 @@ def laporan(nim):
                 data = response.json()
 
                 table_data = []
+                table_data2 = []
 
                 for mahasiswa in data:
                     nim = mahasiswa['nim']
                     nama = mahasiswa['nama']
                     hadir = mahasiswa['hadir']
 
-                    if hadir == "T":
+                    if hadir == "P":
                         table_data.append([nama, nim])
+                    else:
+                        table_data2.append([nama, nim])
 
                 if table_data:
                     headers = ["Nama", "NIM"]
+                    print("============= [ Daftar TIDAK HADIR peserta wisuda ] ==============")
                     print(tabulate(table_data, headers=headers, tablefmt="fancy_grid"))
-                else:
-                    print(Fore.RED + "Tidak ada mahasiswa yang hadir.")
+                
+                if table_data2:
+                    headers = ["Nama", "NIM"]
+                    print("============= [ Daftar TIDAK HADIR karena TIDAK LULUS peserta wisuda ] ==============")
+                    print(tabulate(table_data2, headers=headers, tablefmt="fancy_grid"))
             else:
                 print("Gagal mengambil data dari API")
             while True:
